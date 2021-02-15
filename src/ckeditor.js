@@ -1,8 +1,11 @@
 /**
- * @license Copyright (c) 2014-2021, CKSource - Frederico Knabben. All rights reserved.
+ * @license Copyright (c) 2003-2020, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
-import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
+
+// The editor creator to use.
+import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment.js';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat.js';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote.js';
@@ -11,6 +14,7 @@ import Code from '@ckeditor/ckeditor5-basic-styles/src/code.js';
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock.js';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials.js';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading.js';
+import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline.js';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent.js';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock.js';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic.js';
@@ -27,18 +31,16 @@ import SpecialCharactersEssentials from '@ckeditor/ckeditor5-special-characters/
 import SpecialCharactersLatin from '@ckeditor/ckeditor5-special-characters/src/specialcharacterslatin.js';
 import SpecialCharactersMathematical from '@ckeditor/ckeditor5-special-characters/src/specialcharactersmathematical.js';
 import SpecialCharactersText from '@ckeditor/ckeditor5-special-characters/src/specialcharacterstext.js';
-import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough.js';
 import Table from '@ckeditor/ckeditor5-table/src/table.js';
+import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
-import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
-import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount.js';
 
-class Editor extends ClassicEditorBase {}
+export default class ClassicEditor extends ClassicEditorBase {}
 
 // Plugins to include in the build.
-Editor.builtinPlugins = [
+ClassicEditor.builtinPlugins = [
 	Alignment,
 	Autoformat,
 	BlockQuote,
@@ -46,10 +48,11 @@ Editor.builtinPlugins = [
 	Code,
 	CodeBlock,
 	Essentials,
-	Heading,
+	HorizontalLine,
 	Indent,
 	IndentBlock,
 	Italic,
+	Heading,
 	Link,
 	List,
 	ListStyle,
@@ -63,13 +66,85 @@ Editor.builtinPlugins = [
 	SpecialCharactersLatin,
 	SpecialCharactersMathematical,
 	SpecialCharactersText,
-	Strikethrough,
 	Table,
+	TableProperties,
 	TableToolbar,
 	TextTransformation,
-	TodoList,
-	Underline,
-	WordCount
+	Underline
 ];
 
-export default Editor;
+// Editor configuration.
+ClassicEditor.defaultConfig = {
+	toolbar: {
+		items: [
+			"alignment:left",
+			"alignment:right",
+			"alignment:center",
+			"alignment:justify",
+			"alignment",
+			"blockQuote",
+			"bold",
+			"ckfinder",
+			"code",
+			"codeBlock",
+			"imageTextAlternative",
+			"imageUpload",
+			"selectAll",
+			"undo",
+			"redo",
+			"exportPdf",
+			"exportWord",
+			"fontBackgroundColor",
+			"fontColor",
+			"fontFamily",
+			"fontSize",
+			"highlight:yellowMarker",
+			"highlight:greenMarker",
+			"highlight:pinkMarker",
+			"highlight:blueMarker",
+			"highlight:redPen",
+			"highlight:greenPen",
+			"removeHighlight",
+			"highlight",
+			"horizontalLine",
+			"imageResize:original",
+			"imageResize:25",
+			"imageResize:50",
+			"imageResize:75",
+			"imageResize",
+			"imageStyle:full",
+			"imageStyle:side",
+			"indent",
+			"outdent",
+			"italic",
+			"heading",
+			"link",
+			"numberedList",
+			"bulletedList",
+			"mediaEmbed",
+			"pageBreak",
+			"removeFormat",
+			"specialCharacters",
+			"restrictedEditingException",
+			"insertTable",
+			"tableColumn",
+			"tableRow",
+			"mergeTableCells",
+			"tableCellProperties",
+			"tableProperties",
+			"underline"
+		]
+	},
+	table: {
+		contentToolbar: [
+			'tableColumn',
+			'tableRow',
+			'mergeTableCells'
+		]
+	},
+	alignment: {
+		options: ['left', 'right', 'center', 'justify']
+	},
+	// This value must be kept in sync with the language defined in webpack.config.js.
+	language: 'en'
+};
